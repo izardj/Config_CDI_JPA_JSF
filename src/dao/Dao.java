@@ -32,4 +32,22 @@ public class Dao implements IDao {
 		return clients;
 	}
 
+	@Override
+	public void deleteClient(Client c) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.remove(em.contains(c) ? c : em.merge(c));
+		tx.commit();
+		em.close();
+	}
+
+	@Override
+	public Client findClientById(long idClient) {
+		EntityManager em = emf.createEntityManager();
+		Client client = em.find(Client.class, idClient);
+		em.close();
+		return client;
+	}
+
 }

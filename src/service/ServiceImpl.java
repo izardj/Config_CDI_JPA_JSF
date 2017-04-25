@@ -22,4 +22,9 @@ public class ServiceImpl implements IService {
 		return dao.listClients();
 	}
 
+	@Override
+	public void deleteClient(Client c) {
+		dao.deleteClient(c);
+	}
+
 }

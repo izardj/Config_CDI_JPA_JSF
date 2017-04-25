@@ -16,6 +16,33 @@
 			<h:inputText id="prenom" value="#{clientBean.client.prenom}" />
 		</h:panelGrid>
 		<h:commandButton action="#{clientBean.add}" value="Ajouter" />
+		<h2>Liste des clients</h2>
+		<h:dataTable value="#{clientBean.list()}" var="c" border="1">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{c.id}"/>
+			</h:column>
+		
+			<h:column>
+				<f:facet name="header">NOM</f:facet>
+				<h:outputText value="#{c.nom}"/>
+			</h:column>
+		
+			<h:column>
+				<f:facet name="header">PRENOM</f:facet>
+				<h:outputText value="#{c.prenom}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">SUPPRIMER</f:facet>
+				<h:commandLink update="@form" action="#{clientBean.delete}" value="Supprimer">
+					<f:setPropertyActionListener target="#{clientBean.client}" value="#{c}" />
+				</h:commandLink>
+			</h:column>	
+			<h:column>
+				<f:facet name="header">MAJ</f:facet>
+				<h:commandLink value="Maj"></h:commandLink>
+			</h:column>	
+		</h:dataTable>
 	</h:form>
 </body>
 </html>

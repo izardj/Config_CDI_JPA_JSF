@@ -1,6 +1,5 @@
 package mbeans;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.enterprise.context.RequestScoped;
@@ -37,10 +36,16 @@ public class ClientBean {
 
 	public String add(){
 		services.addClient(client);
-		return "clients";
+		client = new Client();
+		return "index";
 	}
 	
 	public Collection<Client> list(){
 		return services.listClients();
+	}
+	
+	public void delete(){
+		services.deleteClient(client);
+		client = new Client();
 	}
 }
