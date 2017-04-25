@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -20,6 +22,14 @@ public class Dao implements IDao {
 		tx.commit();
 		em.close();
 		return c.getId();
+	}
+
+	@Override
+	public Collection<Client> listClients() {
+		EntityManager em = emf.createEntityManager();
+		Collection<Client> clients = em.createNamedQuery("Client.findAll").getResultList();
+		em.close();
+		return clients;
 	}
 
 }

@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Collection;
+
 import javax.inject.Inject;
 
 import dao.IDao;
@@ -13,6 +15,11 @@ public class ServiceImpl implements IService {
 	@Override
 	public long addClient(Client c) {
 		return dao.addClient(c);
+	}
+
+	@Override
+	public Collection<Client> listClients() {
+		return dao.listClients();
 	}
 
 }

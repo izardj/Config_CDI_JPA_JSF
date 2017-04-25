@@ -11,11 +11,11 @@
 	<h:form>
 		<h:panelGrid columns="2" border="1" width="200" cellpadding="5">
 			<h:outputLabel value="nom" />
-			<h:inputText id="nom" value="#{client}" />
+			<h:inputText id="nom" value="#{clientBean.client.nom}" />
 			<h:outputLabel value="prenom" />
-			<h:inputText id="prenom" value="#{client}" />
+			<h:inputText id="prenom" value="#{clientBean.client.prenom}" />
 		</h:panelGrid>
-		<h:commandButton action="#{client}" value="Ajouter" />
+		<h:commandButton action="#{clientBean.add}" value="Ajouter" />
 	</h:form>
 </body>
 </html>
