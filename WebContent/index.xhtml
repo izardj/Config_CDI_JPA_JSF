@@ -9,13 +9,16 @@
 </head>
 <body>
 	<h:form>
-		<h:panelGrid columns="2" border="1" width="200" cellpadding="5">
+		<h:messages />
+		<h:panelGrid columns="3" cellpadding="5">
 			<h:outputLabel value="nom" />
-			<h:inputText id="nom" value="#{clientBean.client.nom}" />
+			<h:inputText id="nom" value="#{clientBean.client.nom}" required="true" label="nom" />
+			<h:message for="nom" />
 			<h:outputLabel value="prenom" />
-			<h:inputText id="prenom" value="#{clientBean.client.prenom}" />
+			<h:inputText id="prenom" value="#{clientBean.client.prenom}" required="true" label="prenom" />
+			<h:message for="prenom" />
 		</h:panelGrid>
-		<h:commandButton action="#{clientBean.add}" value="Ajouter" />
+		<h:commandButton action="#{clientBean.add}" value="#{clientBean.editMode ? 'Modifier':'Ajouter'}" />
 		<h2>Liste des clients</h2>
 		<h:dataTable value="#{clientBean.list()}" var="c" border="1">
 			<h:column>
@@ -34,13 +37,15 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">SUPPRIMER</f:facet>
-				<h:commandLink update="@form" action="#{clientBean.delete}" value="Supprimer">
+				<h:commandLink action="#{clientBean.delete}" value="Supprimer">
 					<f:setPropertyActionListener target="#{clientBean.client}" value="#{c}" />
 				</h:commandLink>
 			</h:column>	
 			<h:column>
 				<f:facet name="header">MAJ</f:facet>
-				<h:commandLink value="Maj"></h:commandLink>
+				<h:commandLink action="#{clientBean.maj}" value="Maj">
+					<f:setPropertyActionListener target="#{clientBean.client}" value="#{c}" />
+				</h:commandLink>
 			</h:column>	
 		</h:dataTable>
 	</h:form>

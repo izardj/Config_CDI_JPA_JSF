@@ -50,4 +50,14 @@ public class Dao implements IDao {
 		return client;
 	}
 
+	@Override
+	public void majClient(Client c) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.merge(c);
+		tx.commit();
+		em.close();
+	}
+
 }

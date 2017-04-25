@@ -2,7 +2,7 @@ package mbeans;
 
 import java.util.Collection;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -10,13 +10,14 @@ import metier.Client;
 import service.IService;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class ClientBean {
 	
 	@Inject
-	private IService services;
+	private IService service;
 
 	private Client client = new Client();
+	private boolean editMode = false;
 	
 	public Client getClient() {
 		return client;
@@ -27,25 +28,46 @@ public class ClientBean {
 	}
 
 	public IService getServices() {
-		return services;
+		return service;
 	}
 
 	public void setServices(IService services) {
-		this.services = services;
+		this.service = services;
+	}
+
+	public boolean isEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(boolean editMode) {
+		this.editMode = editMode;
 	}
 
 	public String add(){
-		services.addClient(client);
+		if(editMode == false){
+			service.addClient(client);
+		}
+		else
+		{
+			service.majClient(client);
+			editMode = false;
+		}
 		client = new Client();
 		return "index";
 	}
 	
 	public Collection<Client> list(){
-		return services.listClients();
+		return service.listClients();
 	}
 	
-	public void delete(){
-		services.deleteClient(client);
+	public String delete(){
+		service.deleteClient(client);
 		client = new Client();
+		return "index";
+	}
+	
+	public String maj(){
+		editMode = true;
+		return "index";
 	}
 }
