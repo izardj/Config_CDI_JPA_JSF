@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<h:form>
+		<h:panelGrid columns="2" border="1" width="200" cellpadding="5">
+			<h:outputLabel value="nom" />
+			<h:inputText id="nom" value="#{client}" />
+			<h:outputLabel value="prenom" />
+			<h:inputText id="prenom" value="#{client}" />
+		</h:panelGrid>
+		<h:commandButton action="#{client}" value="Ajouter" />
+	</h:form>
+</body>
+</html>
