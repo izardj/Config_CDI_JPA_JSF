@@ -11,11 +11,13 @@
 <body>
 	<h:form>
 		<h:messages errorClass="error"/>
-		<h:panelGrid columns="2" cellpadding="5">
+		<h:panelGrid columns="3" cellpadding="5">
 			<h:outputLabel value="nom" />
-			<h:inputText id="nom" value="#{clientBean.client.nom}" />
+			<h:inputText id="nom" value="#{clientBean.client.nom}" required="true" label="nom" />
+			<h:message for="nom" errorClass="error"/>
 			<h:outputLabel value="prenom" />
-			<h:inputText id="prenom" value="#{clientBean.client.prenom}" />
+			<h:inputText id="prenom" value="#{clientBean.client.prenom}" required="true" label="prenom" />
+			<h:message for="prenom" errorClass="error"/>
 		</h:panelGrid>
 		<h:commandButton action="#{clientBean.add}" value="#{clientBean.editMode ? 'Modifier':'Ajouter'}" />
 		<h2>Liste des clients</h2>

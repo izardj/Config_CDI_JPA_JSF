@@ -2,6 +2,8 @@ package mbeans;
 
 import java.util.Collection;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,13 +14,13 @@ import service.IService;
 @Named
 @ViewScoped
 public class ClientBean {
-	
+
 	@Inject
 	private IService service;
 
 	private Client client = new Client();
 	private boolean editMode = false;
-	
+
 	public Client getClient() {
 		return client;
 	}
@@ -43,31 +45,32 @@ public class ClientBean {
 		this.editMode = editMode;
 	}
 
-	public String add(){
-		if(editMode == false){
-			service.addClient(client);
-		}
-		else
-		{
-			service.majClient(client);
-			editMode = false;
+	public String add() {
+		if (!client.getNom().equalsIgnoreCase("") && !client.getPrenom().equalsIgnoreCase("")) {
+			if (editMode == false) {
+				service.addClient(client);
+			} else {
+				service.majClient(client);
+				editMode = false;
+			}
+		} else {
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage("client", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir les valeurs non nulles", null));
 		}
 		client = new Client();
 		return "index";
 	}
-	
-	public Collection<Client> list(){
+
+	public Collection<Client> list() {
 		return service.listClients();
 	}
-	
-	public String delete(){
+
+	public void delete() {
 		service.deleteClient(client);
 		client = new Client();
-		return "index";
 	}
-	
-	public String maj(){
+
+	public void maj() {
 		editMode = true;
-		return "index";
 	}
 }
