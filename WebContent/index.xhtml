@@ -3,24 +3,25 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-<head>
+<h:head>
 <meta charset="UTF-8" />
 <title>Insert title here</title>
-</head>
+<h:outputStylesheet library="css" name="style.css"/>
+</h:head>
 <body>
 	<h:form>
-		<h:messages />
+		<h:messages errorClass="error"/>
 		<h:panelGrid columns="3" cellpadding="5">
 			<h:outputLabel value="nom" />
 			<h:inputText id="nom" value="#{clientBean.client.nom}" required="true" label="nom" />
-			<h:message for="nom" />
+			<h:message for="nom" errorClass="error"/>
 			<h:outputLabel value="prenom" />
 			<h:inputText id="prenom" value="#{clientBean.client.prenom}" required="true" label="prenom" />
-			<h:message for="prenom" />
+			<h:message for="prenom" errorClass="error"/>
 		</h:panelGrid>
 		<h:commandButton action="#{clientBean.add}" value="#{clientBean.editMode ? 'Modifier':'Ajouter'}" />
 		<h2>Liste des clients</h2>
-		<h:dataTable value="#{clientBean.list()}" var="c" border="1">
+		<h:dataTable value="#{clientBean.list()}" var="c" border="1" >
 			<h:column>
 				<f:facet name="header">ID</f:facet>
 				<h:outputText value="#{c.id}"/>
